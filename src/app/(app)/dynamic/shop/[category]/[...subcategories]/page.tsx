@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Page({params}: {params: {subcategories: []}}) {
   console.log(params.subcategories)
   return (
@@ -8,6 +10,7 @@ export default function Page({params}: {params: {subcategories: []}}) {
           <li key={idx}>{cat}</li>
         ))}
       </ul>
+      <Link href="/dynamic/shop/home">back</Link>
     </div>
   )
 }

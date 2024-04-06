@@ -5,14 +5,13 @@ import {usePathname} from 'next/navigation'
 
 export default function NavLinks() {
   const pathname = usePathname()
-  console.log(pathname)
   return (
     <aside className="from-dark-900 w-64 space-y-2 bg-gradient-to-b via-gray-800 to-gray-900 p-4">
       {/* Menu items */}
       <nav className="flex flex-col">
         {links.map((link) => {
           // const LinkIcon = link.icon
-          console.log(link.href)
+
           return (
             <Link
               key={link.name}
