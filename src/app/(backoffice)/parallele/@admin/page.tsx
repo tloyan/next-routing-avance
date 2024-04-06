@@ -1,5 +1,8 @@
-const Page = () => {
+const Page = async () => {
   // Définition de l'objet utilisateur
+  await new Promise((resolve) => {
+    setTimeout(resolve, 3000)
+  })
 
   return (
     <div className="mx-auto max-w-4xl p-5">
