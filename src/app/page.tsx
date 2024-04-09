@@ -31,7 +31,7 @@ export default function Home() {
 
       <div className="relative z-[-1] flex flex-col items-center justify-center from-sky-200 from-white via-blue-200 to-transparent before:absolute before:inset-0 before:rounded-full before:bg-gradient-radial before:blur-2xl before:content-[''] after:absolute after:inset-0 after:-z-20 after:bg-gradient-conic after:blur-2xl after:content-[''] sm:before:w-[480px] sm:after:w-[240px] lg:before:h-[360px] dark:before:bg-gradient-to-br dark:before:from-transparent dark:before:to-blue-700 dark:before:opacity-10 dark:after:from-sky-900 dark:after:via-[#0141ff] dark:after:opacity-40">
         <p className="z-10 mt-4 bg-gradient-to-r from-indigo-600 to-fuchsia-500 bg-clip-text bg-clip-text text-6xl text-transparent text-transparent">
-          Web 3 SaaS
+          Web 3 SaaS3qsdqsdqs
         </p>
         <Image
           className="relative z-10"
