@@ -102,6 +102,10 @@ src/app/bo/layout.exercice.tsx -> src/app/bo/layout.tsx
 - Une pour l’application frontoffice `🤖 (app)`
   - fait en sorte que `cgv` utilise le même `layout` que `app`
 
+Constate que seulement les segments qui changent sont re-rendus, ce le principe de partial rendering
+
+📑 Doc partial rendering [https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering)
+
 Fichiers & dossiers
 
 - `/app/bo`
