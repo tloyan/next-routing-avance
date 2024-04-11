@@ -46,9 +46,9 @@ Pour simplifier l’exercice les routes suivantes sont déjà créée. Elle ne s
 
 Fichiers & dossier
 
-- `/app/parralel/admin`
-- `/app/parralel/editor`
-- `/app/parralel/layout.tsx`
+- `/app/(backfoffice)/parralel/admin`
+- `/app/(backfoffice)/parralel/editor`
+- `/app/(backfoffice)/parralel/layout.tsx`
 
 ## Bonus
 
@@ -67,7 +67,7 @@ Cette méthode permet également de faire du rendu conditionnel de pages.
 
 Fichiers
 
-- `/app/parralel/layout.tsx`
+- `/app/(backfoffice)/parralel/layout.tsx`
 
 ### 2. 🚀 Streaming / Loading
 
@@ -108,9 +108,9 @@ await new Promise((resolve) => {
 Fichiers
 
 - Fichiers
-- `/app/parralel/admin`
-- `/app/parralel/editor`
-- `/app/parralel/layout.tsx`
+- `/app/(backfoffice)/parralel/admin`
+- `/app/(backfoffice)/parralel/editor`
+- `/app/(backfoffice)/parralel/layout.tsx`
 
 ## Aller plus loin
 
