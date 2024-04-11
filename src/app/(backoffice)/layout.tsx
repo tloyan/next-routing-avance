@@ -20,19 +20,19 @@ export default function BackofficeLayout({children}: PropsWithChildren) {
         <aside className="from-dark-900 w-64 space-y-2 bg-gradient-to-b via-gray-800 to-gray-900 p-4">
           <nav className="flex flex-col">
             <Link
-              href="/final"
+              href="/"
               className="block rounded px-4 py-2 transition-colors hover:bg-gray-700"
             >
               Home
             </Link>
             <Link
-              href="/final/bo"
+              href="/bo"
               className="block rounded px-4 py-2 transition-colors hover:bg-gray-700"
             >
               Backoffice
             </Link>
             <Link
-              href="/final/bo/reports"
+              href="/bo/reports"
               className="block rounded px-4 py-2 transition-colors hover:bg-gray-700"
             >
               Reports
