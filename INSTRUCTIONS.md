@@ -1,6 +1,6 @@
-# Intercepter les routes
+# Faire des routes dynamiques
 
-### 💡 Comprendre l’interception de routes
+### 💡 Comprendre les routes dynamiques
 
 ## 📝 Tes notes
 
@@ -8,50 +8,101 @@ Detaille ce que tu as appris ici, sur une page [Notion](https://go.mikecodeu
 
 ## Comprendre
 
-L’interception de route permet de charger une route depuis une autre partie de l’application mais dans le `Layout` courant. Pour ce faire il faut etre sur un segment, avoir un lien vers une route a intercepter et placer un dossier contenant
+Les routes dynamiques sont très utiles quand on ne connait pas à l’avance le segment. Par exemple `/blog/how-to-learn-next` et `/blog/suspense-react`.
 
-- `(.)` pour matcher avec un segment du même niveau
-- `(..)` pour matcher avec un segment d’un niveau supérieur
-- `(..)(..)` pour matcher avec un segment de 2 niveaux supérieurs
-- `(...)` pour matcher avec un segment a la racine
+Il a une convention avec `next` qui permet de créer ce type de route et de récupérer les params. Pour cela il faut créer un répertoire entre crochets `[folder]` Dans notre exemple `/blog/[slug]` `slug` et récupéré du `props params`
 
-📑 Le liens vers la doc [https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes)
+```tsx
+//app/blog/[slug]/page.tsx
+export default function Page({ params }: { params: { slug: string } }) {
+  return <h1>Article :  {slug}</h1>
+}
+```
+
+📑 Le liens vers la doc [https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
 
 ## Exercice
 
-Dans cet exercice nous avons ajouté dans le backoffice un route `/intercept` pour les besoins de l’exercice. Cette route contient un lien vers les cgv `/cgv`. Lorsque l’on clique sur ce lien on arrive sur la partie `frontoffice` avec le layout du frontoffice qui affiche les CGV.
+Nous avons 3 routes statiques dans notre application.
 
-Dans cet exercice tu vas devoir intercepter la route `/cgv` dans le backoffice et afficher un contenu diffèrent dans le `layout` du backoffice.
+- Une pour afficher une image d’avatar
 
-- 🐶 créé un dossier `cgv` dans `intercept`contenant `page.tsx`
-- Applique la bonne convention pour intercepter à la racine
-- modifie `page.tsx` et ajoute le content intercepté
+[http://localhost:3000/dynamic/avatar/1](http://localhost:3000/dynamic/avatar/1)
+
+- et deux autres pour afficher 2 catégories de produits
+
+[http://localhost:3000/dynamic/shop/shoes](http://localhost:3000/dynamic/shop/shoes)
+
+[http://localhost:3000/dynamic/shop/pants](http://localhost:3000/dynamic/shop/pants)
+
+Dans cet exercice tu vas devoir rendre dynamiques les routes avatar et shop.
+
+- 🐶 renomme `(app)/dynamic/avatar/1` en `(app)/dynamic/avatar/[id]`
+- 🐶 adapte `(app)/dynamic/avatar/[id]/page.tsx` pour récuperer le bon user en fonction de l’id en bdd
+
+Fait la même chose pour le segment `shop`
+
+Fichiers
+
+- `(app)/dynamic/avatar/1`
+- `(app)/dynamic/avatar/1/page.tsx`
+- `(app)/dynamic/shop/shoes/page.tsx`
+- `(app)/dynamic/shop/pants/page.tsx`
+
+## Bonus
+
+### 1. 🚀 Gérer les 404
+
+Si un segment n’existe pas (pas de répertoire) `next` génère automatiquement un page 404.
+
+Mais comment faire pour les segments dynamique ?
+
+Dans notre cas, les avatars viennent de notre base de données (`id 1 et id 2`) les autres `id` sont inexistants. Il faut gérer ce cas. Pour cela next a une `function notFound()` qui permet de gérer cela
 
 ```tsx
-const Page = () => {
-  return (
-    <div>
-      <h1>CGV intercepted, valide ici les CGV</h1>
-      <p>
-        {`Utilisateur du backOffice, En utilisant ce service, vous acceptez les précautions d'utilisation.
-        Veuillez les lire attentivement avant d'accéder ou d'utiliser le
-        service.`}
-      </p>
-    </div>
-  )
-}
-
+import {notFound} from 'next/navigation'
+...
+if (!currentUser) notFound()
 ```
 
-Fichiers & dossier
+- 🐶 Gère les 404 pour les avatars
 
-- `app/(backoffice)/intercept/`
+Fichiers
+
+- `(app)/dynamic/avatar/[id]/page.tsx`
+
+### 2. 🚀 Catch All Segments
+
+Il est également possible d’intercepter tout les segments, dans le cas ou le nombre de segment n’est pas fixe. exemple de segments
+
+- `/shop/a/b`
+- `/shop/a/b/c`
+- etc …
+
+Dans cet exercice tu vas devoir gérer tous les segments de sous catégories.
+
+- 🐶 dans le dossier `[cayegory]` ajoute un sous dossier `[...subcategories]` contenant un `page.tsx`, fait en sorte de lister toutes les sous catégories tel que : `/dynamic/shop/shoes/a/b/c/d/e` affiche une liste a b c d e …
+
+```tsx
+// shop/[category]/[...subcategories]/page.tsx
+ <div>
+    My SUB Categories :
+    <ul>
+      {params.subcategories.map((cat, idx) => (
+        <li key={idx}>{cat}</li>
+      ))}
+    </ul>
+    <Link href="/final/dynamic/shop/home">back</Link>
+  </div>
+```
+
+Fichiers
+
+- `(app)/dynamic/shop/[category]`
 
 ## Aller plus loin
 
-Cette méthode associée aux routes parallèles et très utilisé pour gérer les modales
-
-📑 Le lien vers la doc [https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes)
+📑 Le lien vers la doc [https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
 
 ## Ils vont t’aider
 
@@ -63,4 +114,4 @@ Cette méthode associée aux routes parallèles et très utilisé pour gérer le
 
 ## 🐜 Feedback
 
-Remplir le formulaire le [formulaire de FeedBack.](https://go.mikecodeur.com/cours-next-avis?entry.1912869708=Next%20PRO&entry.1430994900=2.Routing%20Avance&entry.533578441=03%20Les%20interceptions%20de%20routes)
+Remplir le formulaire le [formulaire de FeedBack](https://go.mikecodeur.com/cours-next-avis?entry.1912869708=Next%20PRO&entry.1430994900=2.Routing%20Avance&entry.533578441=04%20Routes%20dynamiques).

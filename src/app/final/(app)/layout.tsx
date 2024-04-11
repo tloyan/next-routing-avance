@@ -29,6 +29,22 @@ export default function AppLayout({children}: PropsWithChildren) {
                 CGV
               </Link>
             </li>
+            <li>
+              <Link
+                href="/final/dynamic/avatar/1"
+                className="hover:text-gray-300"
+              >
+                Avatar
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/final/dynamic/shop/shoes/nike"
+                className="hover:text-gray-300"
+              >
+                Shop
+              </Link>
+            </li>
           </ul>
 
           <div>
