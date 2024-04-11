@@ -37,16 +37,9 @@ export default function BackofficeLayout({children}: PropsWithChildren) {
             >
               Reports
             </Link>
-            <Link
-              href="/final/bo/analytics"
-              className="block rounded px-4 py-2 transition-colors hover:bg-gray-700"
-            >
-              Analytics
-            </Link>
           </nav>
         </aside>
 
-        {/* Adjusted to match header/footer gradient */}
         <main className="flex-1 overflow-auto bg-gradient-to-r from-black to-gray-800 p-4">
           {children}
         </main>

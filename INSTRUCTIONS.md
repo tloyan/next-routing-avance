@@ -128,9 +128,55 @@ Fichiers
 
 - `bo/reports`
 
+### 2. 🚀 Template vs Layout
+
+Les `Templates` sont similaires aux `Layout` mais il sont systématiquement re-rendu lors de la navigation (contrairement au `Layout`).
+
+- Les `Layout` gardent les `states`
+- Les `Template` ne gardent pas les `states` et les effets de bord sont réexécuter (`useEffect`)
+
+**👨‍✈️** Hugo te demande d’ajouter dans le backoffice un champs input pour contacter le support, ce champs doit garder son état durant la navigation
+
+🐶 Dans cet exercice ajoute un fichier `template.tsx` dans le répertoire `app/bo`
+
+```tsx
+'use client'
+import React, {useEffect, useState} from 'react'
+
+export default function Template({children}: {children: React.ReactNode}) {
+  const [support, setSupport] = useState('')
+  useEffect(() => {
+    console.log('Template/Layout mounted')
+  }, [])
+  return (
+    <>
+      <div className="flex  flex-col gap-2">
+        <label htmlFor="support">Contacter le support</label>
+        <input
+          className="w-60 text-black"
+          id="support"
+          value={support}
+          onChange={(e) => setSupport(e.target.value)}
+        />
+      </div>
+      <div>{children}</div>
+    </>
+  )
+}
+```
+
+Constate que l’état est perdu lors de la navigation et que nous souhaitons pas ce comportement. constate également les dates de génération de pages `bo` et `report` .
+
+- 🐶 Renomme `/app/bo/template.tsx` en `/app/bo/layout.tsx` et constate que l’état et préservé et que le composent n’est pas remonté systématiquement (ainsi que les page.tsx)
+
+Fichiers & dossiers
+
+- `/app/bo/template.tsx`
+- `/app/bo/layout.tsx`
+
 ## Aller plus loin
 
-📑 Le lien vers la doc [https://www.w3schools.com/html/html_css.asp](https://www.w3schools.com/html/html_css.asp)
+📑 Le lien vers la doc [https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts)
 
 ## Ils vont t’aider
 
