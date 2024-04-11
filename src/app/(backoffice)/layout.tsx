@@ -43,6 +43,12 @@ export default function BackofficeLayout({children}: PropsWithChildren) {
             >
               Parallel
             </Link>
+            <Link
+              href="/intercept"
+              className="block rounded px-4 py-2 transition-colors hover:bg-gray-700"
+            >
+              Intercept CGV
+            </Link>
           </nav>
         </aside>
 
