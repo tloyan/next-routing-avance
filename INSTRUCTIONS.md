@@ -1,6 +1,6 @@
-# Les groupes de routes (Route Groups)
+# Les Routes parallèles
 
-### 💡 Comprendre les groupes de routes
+### 💡 Comprendre les routes parallèles
 
 ## 📝 Tes notes
 
@@ -8,179 +8,113 @@ Detaille ce que tu as appris ici, sur une page [Notion](https://go.mikecodeu
 
 ## Comprendre
 
-Avec Next, les répertoires dans `/app` sont considérés comme routable (si un segment contient un fichier `page.tsx`)
-
-```
-app
-├── login
-│   └── page.tsx
-├── dahsboard
-│   └── page.tsx
-└── register
-    └── page.tsx
-```
-
-Si nous souhaitons regrouper `login` et `register` ensemble avec le même `layout` et `dashboard` avec un autre `layout` faudrait faire
-
-```
-app
-├── auth
-│   ├── login
-│   │   └── page.tsx
-│   ├── register
-│   │   └── page.tsx
-│   └── layout.tsx
-└── dahsboard
-    ├── page.tsx
-    └── layout.tsx
-```
-
-Le problème de faire cela est que cela va rajouter un segment (`auth`) dans nos routes
-
-```
-/auth/login
-/auth/register
-/dashboard
-```
-
-Pour éviter que `auth` soit routé et groupé nos 2 sous segment avec le même `layout`, next a introduit le concept de route groups. Cela s’utilise avec la syntaxe `(folder)`
-
-```
-app
-├── (auth)
-│   ├── login
-│   │   └── page.tsx
-│   ├── register
-│   │   └── page.tsx
-│   └── layout.tsx
-└── dahsboard
-    ├── page.tsx
-    └── layout.tsx
-```
-
-- routes accessibles
-
-```
-/login
-/register
-/dashboard
-```
-
-📑 Le liens vers la doc [https://nextjs.org/docs/app/building-your-application/routing/route-groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups)
-
-## Exercice
-
-👨‍✈️ Hugo le chef de projet te demande de concevoir un SaaS, une application permettant de fonctionner pour des utilisateurs normaux (rôle `user`) et des `admin.`
-
-- Les admin se connecteront sur un `backoffice` de gestion.
-- Nous appellerons le `frontoffice` le reste du site
-
-Ces 2 modes ont 2 structures (layout) séparées et des routes séparées
-
-- Routes
-  - `/bo` le backoffice
-  - `/dashboard` `/cgv` etc … le frontoffice
-
-Pour simplifier l’exercice de notre SaaS, la `HomePage ,`des composants basiques et des routes seront déjà fournis. Nous avons 3 routes sans `Layout`
-
-- `/dashboard`
-- `/cgv`
-- `/bo`
-
-### Instructions
-
-🐶 Dans un premier temps crée des `layouts` pour chaque routes. Tu peux renommer les fichiers
-
-```
-src/app/dashboard/layout.exercice.tsx -> src/app/bo/layout.tsx
-src/app/bo/layout.exercice.tsx -> src/app/bo/layout.tsx
-```
-
-🐶 Dans un second temps crée 2 routes groupées
-
-- Une pour le backoffice `🤖 (backoffice)`
-- Une pour l’application frontoffice `🤖 (app)`
-  - fait en sorte que `cgv` utilise le même `layout` que `app`
-
-Constate que seulement les segments qui changent sont re-rendus, ce le principe de partial rendering
-
-📑 Doc partial rendering [https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering)
-
-Fichiers & dossiers
-
-- `/app/bo`
-- `/app/cgv`
-- `/app/dashboard`
-
-## Bonus
-
-### 1. 🚀 Répertoire non routable
-
-Parfois il peut être utile d’avoir des répertoires non routable. Par exemple si l’on a un répertoire `/components/`
-
-Pour rendre un répertoire non routable il faut le renommer avec un `_`
-
-```
-_components
-```
-
-📑 Aller plus loin : [https://nextjs.org/docs/getting-started/project-structure#route-groups-and-private-folders](https://nextjs.org/docs/getting-started/project-structure#route-groups-and-private-folders)
-
-🐶 Dans cette exercice rend le répertoire `/reports` non routable
-
-Fichiers
-
-- `bo/reports`
-
-### 2. 🚀 Template vs Layout
-
-Les `Templates` sont similaires aux `Layout` mais il sont systématiquement re-rendu lors de la navigation (contrairement au `Layout`).
-
-- Les `Layout` gardent les `states`
-- Les `Template` ne gardent pas les `states` et les effets de bord sont réexécuter (`useEffect`)
-
-**👨‍✈️** Hugo te demande d’ajouter dans le backoffice un champs input pour contacter le support, ce champs doit garder son état durant la navigation
-
-🐶 Dans cet exercice ajoute un fichier `template.tsx` dans le répertoire `app/bo`
+Les routes parallèles permettent de rendre une ou plusieurs pages dans le même `Layout`. Ces pages ne sont pas des segments de routes et n’affectent pas les URLs. On les utilisent en créant un dossier commençant par `@`, que l’on appelle des `slots`, exemple `@team` `@analytics` ils sont très utile pour construire des `dashbord` ou pages complexes. Ces slots sont ensuite passés en `props` dans le `Layout` et s’utilisent de la manière suivante :
 
 ```tsx
-'use client'
-import React, {useEffect, useState} from 'react'
-
-export default function Template({children}: {children: React.ReactNode}) {
-  const [support, setSupport] = useState('')
-  useEffect(() => {
-    console.log('Template/Layout mounted')
-  }, [])
+export default function Layout({
+  children,
+  team,
+  analytics,
+}: {
+  children: React.ReactNode
+  analytics: React.ReactNode
+  team: React.ReactNode
+}) {
   return (
     <>
-      <div className="flex  flex-col gap-2">
-        <label htmlFor="support">Contacter le support</label>
-        <input
-          className="w-60 text-black"
-          id="support"
-          value={support}
-          onChange={(e) => setSupport(e.target.value)}
-        />
-      </div>
-      <div>{children}</div>
+      {children}
+      {team}
+      {analytics}
     </>
   )
 }
 ```
 
-Constate que l’état est perdu lors de la navigation et que nous souhaitons pas ce comportement. constate également les dates de génération de pages `bo` et `report` .
+📑 Le liens vers la doc [https://nextjs.org/docs/app/building-your-application/routing/parallel-routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes)
 
-- 🐶 Renomme `/app/bo/template.tsx` en `/app/bo/layout.tsx` et constate que l’état et préservé et que le composent n’est pas remonté systématiquement (ainsi que les page.tsx)
+## Exercice
 
-Fichiers & dossiers
+Dans cet exercice tu vas devoir créer une route `'parallel'` dans le `backoffice` qui va permettre de gérer des pages pour des `admin` et des `editor`.
 
-- `/app/bo/template.tsx`
-- `/app/bo/layout.tsx`
+Pour simplifier l’exercice les routes suivantes sont déjà créée. Elle ne sont pas parallèles
+
+- [http://localhost:3000/parallel/admin](http://localhost:3000/parallel/admin)
+- [http://localhost:3000/parallel/editor](http://localhost:3000/parallel/editor)
+
+- **🐶** Commence par indiquer que les pages `admin` et `editor` seront parallèles grâce à `@`
+- **🐶** Edite le fichier `/app/parralel/layout` pour qu’il fasse le rendu des routes parallèles
+
+Fichiers & dossier
+
+- `/app/parralel/admin`
+- `/app/parralel/editor`
+- `/app/parralel/layout.tsx`
+
+## Bonus
+
+### 1. 🚀 Rendu conditionnel
+
+Cette méthode permet également de faire du rendu conditionnel de pages.
+
+**🐶** Dans cet exercice tu vas devoir faire un rendu de la page `admin` uniquement si le rôle est `admin`. Pour générer un rôle aléatoire pour l’exercice tu peux utiliser
+
+```tsx
+ //layout.tsx
+ const role = Math.random() > 0.5 ? 'admin' : 'editor'
+ ...
+ {role === 'admin' ? admin : undefined}
+```
+
+Fichiers
+
+- `/app/parralel/layout.tsx`
+
+### 2. 🚀 Streaming / Loading
+
+Il arrive que certaines pages (qui peuvent être des RSC) mettent un certains temps à s’afficher. Il peut être intéressant de pouvoir afficher un composant de chargement / Skeleton.
+
+Dans cet exercice nous allons simuler un temps long avec :
+
+```tsx
+// app/parralel/@admin/page.tsx
+await new Promise((resolve) => {
+    setTimeout(resolve, 5000)
+ })
+```
+
+- **🐶** Gère le `loading` en wrappant le rendu de la page `admin` avec `<Suspense>`
+
+```tsx
+//Layout.tsx
+<Suspense fallback={<div>Loading...</div>}>
+ {role === 'admin' ? admin : undefined}
+</Suspense>
+```
+
+### 3. 🚀 loading.tsx
+
+`Next` simplifie la gestion des `loadings` avec l’utilisation d’un fichier `loading.tsx` . Il est possible d’en mettre un à chaque segment de route.
+
+- 🐶 Ajoute un fichier `loading.tsx` retournant un composant loading
+
+```tsx
+<div className="flex h-screen items-center justify-center">
+  <div className="h-32 w-32 animate-spin rounded-full border-8 border-t-8 border-white border-t-transparent shadow-lg"></div>
+</div>
+```
+
+- Pense à supprimer le `<Suspense>` car il n’est plus utile
+
+Fichiers
+
+- Fichiers
+- `/app/parralel/admin`
+- `/app/parralel/editor`
+- `/app/parralel/layout.tsx`
 
 ## Aller plus loin
 
-📑 Le lien vers la doc [https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts)
+📑 Le lien vers la doc [https://nextjs.org/docs/app/building-your-application/routing/parallel-routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes)
 
 ## Ils vont t’aider
 
@@ -192,4 +126,4 @@ Fichiers & dossiers
 
 ## 🐜 Feedback
 
-Remplir le formulaire le [formulaire de FeedBack](https://go.mikecodeur.com/cours-next-avis?entry.1912869708=Next%20PRO&entry.1430994900=2.Routing%20Avance&entry.533578441=01%20Les%20Route%20Groups).
+Remplir le formulaire le [formulaire de FeedBack](https://go.mikecodeur.com/cours-next-avis?entry.1912869708=Next%20PRO&entry.1430994900=2.Routing%20Avance&entry.533578441=02%20Les%20routes%20parrallèles).
