@@ -1,5 +1,5 @@
 {
-  "name": "next-course-template",
+  "name": "next-routing-avance",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,30 +11,30 @@
     "format:fix": "prettier . --write"
   },
   "dependencies": {
+    "next": "^14.2.14",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.1.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@mikecodeur/course-app-cli": "1.0.8",
-    "typescript": "^5",
+    "@mikecodeur/course-app-cli": "1.0.23",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "prettier": "^3.2.1",
-    "prettier-plugin-tailwindcss": "^0.5.11",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-github": "^4.10.1",
     "eslint-plugin-json-format": "^2.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-unicorn": "^50.0.1",
+    "postcss": "^8",
+    "prettier": "^3.2.1",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4"
+    "typescript": "^5"
   }
 }

@@ -16,9 +16,9 @@ export default function Home() {
           >
             By{' '}
             <Image
-              src="/app_icon.png"
-              alt="Vercel Logo"
-              className=""
+              className="relative z-10"
+              src="/NEXT-MASTERY-dark.png"
+              alt="App Logo"
               width={40}
               height={24}
               priority
@@ -28,14 +28,15 @@ export default function Home() {
       </div>
 
       <div className="relative z-[-1] flex flex-col items-center justify-center from-sky-200 from-white via-blue-200 to-transparent before:absolute before:inset-0 before:rounded-full before:bg-gradient-radial before:blur-2xl before:content-[''] after:absolute after:inset-0 after:-z-20 after:bg-gradient-conic after:blur-2xl after:content-[''] sm:before:w-[480px] sm:after:w-[240px] lg:before:h-[360px] dark:before:bg-gradient-to-br dark:before:from-transparent dark:before:to-blue-700 dark:before:opacity-10 dark:after:from-sky-900 dark:after:via-[#0141ff] dark:after:opacity-40">
-        <p className="z-10 mt-4 bg-gradient-to-r from-indigo-600 to-fuchsia-500 bg-clip-text bg-clip-text text-6xl text-transparent text-transparent">
-          Web 3 SaaS
+        <p className="z-10 mt-4 bg-gradient-to-r from-gray-500 to-gray-700 bg-clip-text p-2 text-6xl leading-none text-transparent dark:from-gray-200 dark:to-gray-500">
+          Routing Avancé
         </p>
+
         <Image
-          className="relative z-10"
-          src="/app_logo.png"
+          className="relative z-10 mt-4"
+          src="/NEXT-MASTERY-dark.png"
           alt="App Logo"
-          width={200}
+          width={400}
           height={37}
           priority
         />
@@ -96,7 +97,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Final{' '}
+            Solution{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
