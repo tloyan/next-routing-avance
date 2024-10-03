@@ -14,17 +14,17 @@ export default function AppLayout({children}: PropsWithChildren) {
         <div className="mx-auto flex max-w-4xl items-center justify-between p-4">
           <ul className="flex space-x-4">
             <li>
-              <Link href="/final" className="hover:text-gray-300">
+              <Link href="/" className="hover:text-gray-300">
                 Accueil
               </Link>
             </li>
             <li>
-              <Link href="/final/dashboard" className="hover:text-gray-300">
+              <Link href="/dashboard" className="hover:text-gray-300">
                 DashBoard
               </Link>
             </li>
             <li>
-              <Link href="/final/cgv" className="hover:text-gray-300">
+              <Link href="/cgv" className="hover:text-gray-300">
                 CGV
               </Link>
             </li>
