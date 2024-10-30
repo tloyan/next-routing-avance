@@ -2,7 +2,10 @@ import Link from 'next/link'
 const ranStr = () => {
   return (Math.random() + 1).toString(36).slice(7)
 }
-export default function Page({params}: {params: {category: string}}) {
+export default async function Page(props: {
+  params: Promise<{category: string}>
+}) {
+  const params = await props.params
   const linkA = ranStr()
   const linkB = ranStr()
   const linkC = ranStr()

@@ -2,7 +2,9 @@ import users from '@/db/user'
 import Image from 'next/image'
 import {notFound} from 'next/navigation'
 
-export default function Page({params}: {params: {id: string}}) {
+// Next 15 : les params deviennent async
+export default async function Page(props: {params: Promise<{id: string}>}) {
+  const params = await props.params
   const currentUser = users.find(
     (user) => user.id === Number.parseInt(params.id)
   )

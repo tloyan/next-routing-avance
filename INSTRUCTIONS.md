@@ -14,8 +14,13 @@ Il a une convention avec `next` qui permet de créer ce type de route et de réc
 
 ```tsx
 //app/blog/[slug]/page.tsx
-export default function Page({ params }: { params: { slug: string } }) {
-  return <h1>Article :  {slug}</h1>
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const slug = (await params).slug
+  return <div>My Post: {slug}</div>
 }
 ```
 

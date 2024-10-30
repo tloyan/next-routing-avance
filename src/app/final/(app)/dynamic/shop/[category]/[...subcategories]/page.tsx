@@ -1,6 +1,9 @@
 import Link from 'next/link'
 
-export default function Page({params}: {params: {subcategories: []}}) {
+export default async function Page(props: {
+  params: Promise<{subcategories: []}>
+}) {
+  const params = await props.params
   console.log(params.subcategories)
   return (
     <div>
