@@ -39,6 +39,7 @@ export default function BackofficeLayout({children}: PropsWithChildren) {
             </Link>
             <Link
               href="/parallel"
+              prefetch={true}
               className="block rounded px-4 py-2 transition-colors hover:bg-gray-700"
             >
               Parallel
