@@ -5,7 +5,7 @@
 ## 📝 Tes notes
 
 Detaille ce que tu as appris ici, sur une page [Notion](https://go.mikecodeur.com/course-notes-template)
-
+  
 ## Comprendre
 
 Les routes dynamiques sont très utiles quand on ne connait pas à l’avance le segment. Par exemple `/blog/how-to-learn-next` et `/blog/suspense-react`.
